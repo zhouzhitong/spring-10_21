@@ -123,7 +123,7 @@ public class PropertyPlaceholderHelper {
 		Assert.notNull(value, "'value' must not be null");
 		return parseStringValue(value, placeholderResolver, null);
 	}
-
+	// 开始解析 ${..}
 	protected String parseStringValue(
 			String value, PlaceholderResolver placeholderResolver, @Nullable Set<String> visitedPlaceholders) {
 
@@ -136,7 +136,7 @@ public class PropertyPlaceholderHelper {
 		while (startIndex != -1) {
 			int endIndex = findPlaceholderEndIndex(result, startIndex);
 			if (endIndex != -1) {
-				String placeholder = result.substring(startIndex + this.placeholderPrefix.length(), endIndex);
+				String placeholder = result.substring(startIndex + this.placeholderPrefix.length(), endIndex); // 获取${..} 中的内容
 				String originalPlaceholder = placeholder;
 				if (visitedPlaceholders == null) {
 					visitedPlaceholders = new HashSet<>(4);
@@ -146,9 +146,9 @@ public class PropertyPlaceholderHelper {
 							"Circular placeholder reference '" + originalPlaceholder + "' in property definitions");
 				}
 				// Recursive invocation, parsing placeholders contained in the placeholder key.
-				placeholder = parseStringValue(placeholder, placeholderResolver, visitedPlaceholders);
+				placeholder = parseStringValue(placeholder, placeholderResolver, visitedPlaceholders);// 得到${..}内对应的值
 				// Now obtain the value for the fully resolved key...
-				String propVal = placeholderResolver.resolvePlaceholder(placeholder);
+				String propVal = placeholderResolver.resolvePlaceholder(placeholder); // 得到${..}内对应的值
 				if (propVal == null && this.valueSeparator != null) {
 					int separatorIndex = placeholder.indexOf(this.valueSeparator);
 					if (separatorIndex != -1) {
@@ -162,7 +162,7 @@ public class PropertyPlaceholderHelper {
 				}
 				if (propVal != null) {
 					// Recursive invocation, parsing placeholders contained in the
-					// previously resolved placeholder value.
+					// previously resolved placeholder value. 处理 解析后得到的值中包含${}
 					propVal = parseStringValue(propVal, placeholderResolver, visitedPlaceholders);
 					result.replace(startIndex, endIndex + this.placeholderSuffix.length(), propVal);
 					if (logger.isTraceEnabled()) {

@@ -1,5 +1,6 @@
 package com.mashibing;
 
+import com.mashibing.context.MyClassPathXmlApplicationContext;
 import com.mashibing.selfEditor.Customer;
 import com.mashibing.selftag.User;
 import javafx.application.Application;
@@ -19,7 +20,8 @@ public class Test {
 //        User user = (User) ac.getBean("msb");
 //        System.out.println(user.getUsername());
 
-        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("selfEditor.xml");
+        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("spring-${username}.xml");
+//        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("selfEditor.xml");
         Customer bean = ac.getBean(Customer.class);
         System.out.println(bean);
     }
