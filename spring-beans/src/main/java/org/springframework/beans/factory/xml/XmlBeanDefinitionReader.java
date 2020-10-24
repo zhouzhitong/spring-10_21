@@ -337,7 +337,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			if (encodedResource.getEncoding() != null) {
 				inputSource.setEncoding(encodedResource.getEncoding());
 			}
-			// 逻辑处理的核心步骤
+			// 逻辑处理的核心步骤 TODO
 			return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 		}
 		catch (IOException ex) {
@@ -390,9 +390,18 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			throws BeanDefinitionStoreException {
 
 		try {
-			// 此处获取xml文件的document对象，这个解析过程是由documentLoader完成的,从String[] -string-Resource[]- resource,最终开始将resource读取成一个document文档，根据文档的节点信息封装成一个个的BeanDefinition对象
+
+			/**
+			 * 此处获取xml文件的document对象，
+			 * 这个解析过程是由documentLoader完成的,
+			 * 从String[] -string-Resource[]- resource,
+			 * 最终开始将resource读取成一个document文档，
+			 * 根据文档的节点信息封装成一个个的BeanDefinition对象
+			 */
+			// 将 beanDefinition 解析成 document 文档数据
 			Document doc = doLoadDocument(inputSource, resource);
-			int count = registerBeanDefinitions(doc, resource);
+			int count = registerBeanDefinitions(doc, resource); // TODO
+
 			if (logger.isDebugEnabled()) {
 				logger.debug("Loaded " + count + " bean definitions from " + resource);
 			}
@@ -517,7 +526,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		// 对xml的beanDefinition进行解析
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
 		int countBefore = getRegistry().getBeanDefinitionCount();
-		// 完成具体的解析过程
+		// TODO 完成具体的解析过程
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}

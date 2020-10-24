@@ -20,7 +20,7 @@ public class Test {
 //        User user = (User) ac.getBean("msb");
 //        System.out.println(user.getUsername());
 
-        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("spring-${username}.xml");
+        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("/applicationContext.xml");
 //        MyClassPathXmlApplicationContext ac = new MyClassPathXmlApplicationContext("selfEditor.xml");
         Customer bean = ac.getBean(Customer.class);
         System.out.println(bean);
