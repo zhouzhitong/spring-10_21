@@ -71,7 +71,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	public static final String IMPORT_ELEMENT = "import";
 
 	public static final String RESOURCE_ATTRIBUTE = "resource";
-
+	/** 参考网址：https://www.cnblogs.com/wade-luffy/p/6066932.html */
 	public static final String PROFILE_ATTRIBUTE = "profile";
 
 
@@ -81,7 +81,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	private XmlReaderContext readerContext;
 
 	@Nullable
-	private BeanDefinitionParserDelegate delegate;
+	private BeanDefinitionParserDelegate delegate; // Document 文档信息的包装类
 
 
 	/**
@@ -126,7 +126,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		// then ultimately reset this.delegate back to its original (parent) reference.
 		// this behavior emulates a stack of delegates without actually necessitating one.
 		BeanDefinitionParserDelegate parent = this.delegate;
-		this.delegate = createDelegate(getReaderContext(), root, parent);
+		this.delegate = createDelegate(getReaderContext(), root, parent); // Document 文档信息的包装类
 
 		if (this.delegate.isDefaultNamespace(root)) {
 			String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);
@@ -145,9 +145,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 
-		preProcessXml(root);
+		preProcessXml(root);  // null 用于扩展的
 		parseBeanDefinitions(root, this.delegate); // TODO
-		postProcessXml(root);
+		postProcessXml(root); // null 用于扩展的
 
 		this.delegate = parent;
 	}
@@ -177,7 +177,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						parseDefaultElement(ele, delegate);
 					}
 					else {
-						delegate.parseCustomElement(ele);
+						delegate.parseCustomElement(ele); // 可以用来扩展的，并自定义标签属性
 					}
 				}
 			}

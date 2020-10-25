@@ -398,8 +398,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			 * 最终开始将resource读取成一个document文档，
 			 * 根据文档的节点信息封装成一个个的BeanDefinition对象
 			 */
-			// 将 beanDefinition 解析成 document 文档数据
-			Document doc = doLoadDocument(inputSource, resource);
+			// 将 resource文件内容 解析成 document 文档数据
+			Document doc = doLoadDocument(inputSource, resource); // 读取 配置文件 的所有信息
 			int count = registerBeanDefinitions(doc, resource); // TODO
 
 			if (logger.isDebugEnabled()) {

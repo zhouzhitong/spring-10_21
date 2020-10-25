@@ -1,4 +1,4 @@
-package com.mashibing;
+package com.mashibing.bean;
 
 public class Person {
 

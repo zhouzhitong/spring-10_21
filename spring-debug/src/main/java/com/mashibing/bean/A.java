@@ -1,7 +1,6 @@
-package com.mashibing;
+package com.mashibing.bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 
 public class A {
