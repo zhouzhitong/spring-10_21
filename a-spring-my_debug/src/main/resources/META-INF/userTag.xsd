@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.mashibing.com/schema/userTag"
+        elementFormDefault="qualified">
+
+    <element name="user">
+        <complexType>
+            <attribute name="id" type="string" default="zzt"/>
+            <attribute name="name" type="string" default="zhouzhitong"/>
+            <attribute name="username" type="string" default="root"/>
+            <attribute name="password" type="string" default="root@hiekn"/>
+        </complexType>
+    </element>
+
+</schema>

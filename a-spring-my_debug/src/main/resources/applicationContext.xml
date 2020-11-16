@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:myTag="http://www.mashibing.com/schema/userTag"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.mashibing.com/schema/userTag
+        http://www.mashibing.com/schema/userTag.xsd">
+
+    <!-- 加载外部配置环境 -->
+    <context:property-placeholder location="db.properties"/>
+    <!-- 开启注解扫描 -->
+    <context:component-scan base-package="com.debug.component"/>
+
+    <!-- 自定义标签 -->
+    <myTag:user id="zzt" name="${jdbc.username}"/>
+
+    <!-- 定义 Bean 对象 -->
+    <bean id="person" class="com.debug.bean.Person">
+        <property name="id" value="100"/>
+        <property name="name" value="张三"/>
+    </bean>
+
+    <bean id="personInfo" class="com.debug.bean.PersonInfo">
+        <constructor-arg name="person" ref="person"/>
+        <constructor-arg index="1" value="${jdbc.username}"/>
+        <constructor-arg index="2" value="${jdbc.password}"/>
+    </bean>
+
+
+</beans>

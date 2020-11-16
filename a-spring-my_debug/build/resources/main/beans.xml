@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:myTag="http://www.mashibing.com/schema/userTag"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.mashibing.com/schema/userTag
+        http://www.mashibing.com/schema/userTag.xsd">
+
+    <context:property-placeholder location="db.properties"/>
+
+    <myTag:user id="zzt" name="${jdbc.username}"/>
+
+    <bean id="person" class="com.debug.bean.Person">
+        <property name="id" value="100"/>
+        <property name="name" value="张三"/>
+    </bean>
+
+    <bean id="personInfo" class="com.debug.bean.PersonInfo">
+        <constructor-arg name="person" ref="person"/>
+        <constructor-arg index="1" value="${jdbc.username}"/>
+        <constructor-arg index="2" value="${jdbc.password}"/>
+    </bean>
+
+</beans>
